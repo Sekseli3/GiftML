@@ -23,7 +23,8 @@ To use this project, run the SVC and CNN files to get the models. After that tak
 The SVC models gives consistatly bad resuslts all the time getting about 35% of the presents correct.
 The CNN model is probably overfitting or something because the probabilities of each category are almost always either close to 0 or 100.
 That being said the CNN model gives more correct answers than the SVC with success rate of maybe 50%, ofcourse depending on the photo.
-
+![Alt text](https://github.com/Sekseli3/GiftML/blob/branch/photo2.png)
+![Alt text](https://github.com/Sekseli3/GiftML/blob/branch/photo1.png)
 ### Note
 This project is experimental and the predictions are not always be accurate due to the quality and diversity of the data.
 
