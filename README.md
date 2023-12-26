@@ -1,6 +1,6 @@
 # Christmas Gift Predictor
 
-This project uses Support Vector Classifier (SVC) and Convolutional Neural Network (CNN) models to predict what's inside Christmas presents based on images. The pre determined catagories of christmas presents are: books,bottles,letters,posters,shirts,socks,sportsStuff,tech,treats,toys.
+This project uses Support Vector Classifier (SVC) and Convolutional Neural Network (CNN) models to predict what's inside Christmas presents based on images. I implemented CNN in two ways, firstly with tensorflow and secondly with pytorch. The pre determined catagories of christmas presents are: books,bottles,letters,posters,shirts,socks,sportsStuff,tech,treats,toys.
 The problem with this project is that almost all presents are cubes so even to achieve 50-60% success rate would be good.
 
 ## Data
@@ -21,6 +21,7 @@ To use this project, run the SVC and CNN files to get the models. After that tak
 
 ## Results
 The SVC models gives consistatly bad resuslts all the time getting about 35% of the presents correct.
+The 2 CNN models gave almost identical outputs.
 The CNN model is probably overfitting or something because the probabilities of each category are almost always either close to 0 or 100.
 That being said the CNN model gives more correct answers than the SVC with success rate of maybe 50%, ofcourse depending on the photo.
 ![Alt text](https://github.com/Sekseli3/GiftML/blob/main/photo2.png)
