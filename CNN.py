@@ -14,6 +14,7 @@ from keras.applications.vgg16 import VGG16
 from keras.models import Model
 from keras.layers import Dense, Dropout, Flatten
 from keras.callbacks import EarlyStopping
+from keras.regularizers import l1, l2, l1_l2
 from keras.layers import  Flatten, Dense
 from sklearn.utils import class_weight
 from keras.optimizers.legacy import RMSprop
@@ -58,7 +59,7 @@ labels = np.asarray(labels)
 #including a Flatten layer to convert the feature maps to a 1D vector, a Dense layer with ReLU activation, 
 #a Dropout layer for regularization, and a final Dense layer with softmax activation for the classification. 
 #We then compile and train the model on our data.
-x_train, x_test, y_train, y_test = train_test_split(data, labels, test_size=0.25, shuffle=True, stratify=labels)
+x_train, x_test, y_train, y_test = train_test_split(data, labels, test_size=0.2, shuffle=True, stratify=labels)
 
 # Convert labels to categorical
 y_train = to_categorical(y_train)
@@ -86,10 +87,17 @@ for layer in base_model.layers:
 
 # Add your own layers
 x = base_model.output
+#Non regularizationed version, dont know if any better??
+#x = Flatten()(x)
+##x = Dense(1024, activation='relu')(x)
+#x = Dropout(0.5)(x)
+#predictions = Dense(y_train.shape[1], activation='softmax')(x)  # y_train.shape[1] gives the number of classes
+
+#Regularizationed version, dont know if any better??
 x = Flatten()(x)
-x = Dense(1024, activation='relu')(x)
+x = Dense(1024, activation='relu', kernel_regularizer=l2(0.01))(x)  # L2 regularization
 x = Dropout(0.5)(x)
-predictions = Dense(y_train.shape[1], activation='softmax')(x)  # y_train.shape[1] gives the number of classes
+predictions = Dense(y_train.shape[1], activation='softmax', kernel_regularizer=l2(0.01))(x)  # L2 regularization
 
 # This is the model we will train
 model = Model(inputs=base_model.input, outputs=predictions)
@@ -121,4 +129,4 @@ loss, accuracy = model.evaluate(x_test, y_test)
 print('{}% of samples were correctly classified'.format(str(accuracy*100)))
 
 # Save the model
-#model.save('./model.h5')
+model.save('./model.h5')
